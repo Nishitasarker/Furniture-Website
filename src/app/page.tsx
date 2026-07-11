@@ -4,8 +4,10 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import CategorySection from "@/components/CategorySection"
-import WhyChooseUs from "@/components/WhyChooseUs"
+import CategorySection from "@/components/CategorySection";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import Testimonials from "@/components/CustomerTestimonials"
+import BlogSection from "@/components/InteriorDesignTips"
 
 const slides = [
   { id: 1, title: "Mastercrafted Comfort", desc: "Experience the perfect blend of ergonomic design and luxurious aesthetics tailored for your home.", image: "/sofa.jpg" },
@@ -82,6 +84,8 @@ const HeroSection = () => {
     </section>
     <CategorySection></CategorySection>
     <WhyChooseUs></WhyChooseUs>
+    <Testimonials></Testimonials>
+    <BlogSection></BlogSection>
     </>
   );
 };
