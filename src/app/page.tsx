@@ -7,7 +7,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import CategorySection from "@/components/CategorySection";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Testimonials from "@/components/CustomerTestimonials"
-import BlogSection from "@/components/InteriorDesignTips"
+import BlogSection from "@/components/InteriorDesignTips";
+import NewsletterSocial from "@/components/NewsletterSocial";
 
 const slides = [
   { id: 1, title: "Mastercrafted Comfort", desc: "Experience the perfect blend of ergonomic design and luxurious aesthetics tailored for your home.", image: "/sofa.jpg" },
@@ -75,7 +76,7 @@ const HeroSection = () => {
 
           {/* Button */}
           <motion.div variants={childVariants}>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 text-lg font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+            <Button className="bg-orange-500 text-white font-bold px-8 py-4 rounded-xl hover:bg-orange-600 transition-all">
               Shop Now
             </Button>
           </motion.div>
@@ -86,6 +87,7 @@ const HeroSection = () => {
     <WhyChooseUs></WhyChooseUs>
     <Testimonials></Testimonials>
     <BlogSection></BlogSection>
+    <NewsletterSocial></NewsletterSocial>
     </>
   );
 };

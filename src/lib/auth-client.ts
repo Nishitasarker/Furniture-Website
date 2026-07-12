@@ -1,6 +1,8 @@
-// src/lib/auth-client.ts
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
   baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL || "http://localhost:3000",
 });
+
+// এখান থেকেই সব এক্সপোর্ট করুন
+export const { signIn, signUp, useSession } = authClient;
