@@ -2,27 +2,12 @@ import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
 
-// গ্লোবাল ক্যাশ সঠিকভাবে হ্যান্ডেল করা
-const globalWithMongo = global as typeof global & {
-  _mongoClient?: MongoClient;
-};
+if (!process.env.MONGO_DB_URI) throw new Error("MONGO_DB_URI is missing");
 
-let client: MongoClient;
-
-if (!globalWithMongo._mongoClient) {
-  globalWithMongo._mongoClient = new MongoClient(process.env.MONGO_DB_URI!, {
-    serverSelectionTimeoutMS: 5000,
-    connectTimeoutMS: 10000,
-  });
-}
-client = globalWithMongo._mongoClient;
+const client = new MongoClient(process.env.MONGO_DB_URI);
 
 export const auth = betterAuth({
-  database: mongodbAdapter(client.db(process.env.AUTH_DB_NAME), {
-    client,
-  }),
-  emailAndPassword: {
-    enabled: true,
-  },
-  secret: process.env.BETTER_AUTH_SECRET,
+  database: mongodbAdapter(client.db(process.env.AUTH_DB_NAME || "furniture_db")),
+  emailAndPassword: { enabled: true },
+  secret: process.env.BETTER_AUTH_SECRET!,
 });

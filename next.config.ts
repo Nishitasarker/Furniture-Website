@@ -3,6 +3,10 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
 
+  experimental: {
+    turbo: undefined, // এটি Turbopack কে পুরোপুরি ডিজেবল করবে
+  },
+  
    images: {
     remotePatterns: [
       {

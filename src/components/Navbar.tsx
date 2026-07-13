@@ -74,7 +74,7 @@ const Navbar = () => {
                     </div>
                     <div className="py-2">
                       {[ { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
-                         { name: "Add Item", path: "/items/add", icon: PlusCircle },
+                         { name: "Add Item", path: "/add-product", icon: PlusCircle },
                          { name: "Manage Items", path: "/items/manage", icon: Package }
                       ].map((item) => (
                         <Link key={item.path} href={item.path} onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-orange-50 rounded-xl transition-colors">
