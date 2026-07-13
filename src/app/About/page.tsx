@@ -147,7 +147,7 @@ const AboutPage = () => {
       </div>
 
       <button 
-        onClick={() => window.location.href="/products"} 
+        onClick={() => window.location.href="/productsPage"} 
         className="px-10 py-4 bg-orange-600 text-white hover:bg-orange-700 rounded-2xl font-bold transition-all transform hover:scale-105 shadow-xl shadow-orange-500/20"
       >
         Discover Our Collections

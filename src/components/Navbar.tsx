@@ -42,7 +42,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-8">
           <Link href="/" className={linkClass}>Home</Link>
-          <Link href="/products" className={linkClass}>Products</Link>
+          <Link href="/productsPage" className={linkClass}>Products</Link>
           <Link href="/About" className={linkClass}>About</Link>
         </div>
 
@@ -107,7 +107,7 @@ const Navbar = () => {
               </div>
               <div className="flex flex-col gap-6 font-bold text-gray-700">
                 <Link href="/" className="flex items-center gap-2 p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}><Home size={20}/>Home <ChevronRight size={18}/></Link>
-                <Link href="/products" className="flex items-center gap-2  p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}><Package size={20}/>Products <ChevronRight size={18}/></Link>
+                <Link href="/productsPage" className="flex items-center gap-2  p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}><Package size={20}/>Products <ChevronRight size={18}/></Link>
                 <Link href="/About" className="flex items-center gap-2  p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}> <Info size={20}/>About <ChevronRight size={18}/></Link>
                 {!session && (
                   <>
