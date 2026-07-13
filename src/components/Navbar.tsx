@@ -5,10 +5,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@heroui/react";
-import { Sofa, Info, LayoutDashboard, LogOut, User, PlusCircle, Menu, X, Package, Home, ChevronRight } from 'lucide-react';
+import { Sofa, Info, LayoutDashboard, LogOut, User, PlusCircle, Menu, X, Package, Home, ChevronRight, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
+import { useCart } from '@/context/CartContext';
+
+// ✅ CartIcon আলাদা top-level component
+const CartIcon = () => {
+  const { cartCount } = useCart();
+
+  return (
+    <Link href="/cart" className="relative p-2 inline-block">
+      <ShoppingCart size={26} className="text-gray-700 hover:text-orange-600 transition-colors" />
+      {cartCount > 0 && (
+        <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+          {cartCount}
+        </span>
+      )}
+    </Link>
+  );
+};
 
 const Navbar = () => {
   const { data: session } = authClient.useSession();
@@ -17,11 +34,11 @@ const Navbar = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setIsDropdownOpen(false);
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) setIsDropdownOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -32,7 +49,7 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-gray-200 border-b border-gray-200 sticky top-0 z-50">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 md:px-20">
-        
+
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Sofa size={32} className="text-orange-600" />
@@ -46,8 +63,11 @@ const Navbar = () => {
           <Link href="/About" className={linkClass}>About</Link>
         </div>
 
-        {/* Auth / Profile */}
+        {/* Auth / Profile / Cart */}
         <div className="flex items-center gap-4" ref={dropdownRef}>
+
+          <CartIcon />  {/* ✅ Cart icon এখানে */}
+
           {!session ? (
             <div className="hidden md:flex gap-3">
               <Button onPress={() => router.push("/auth/LogIn")} variant="light" className="bg-orange-500 text-white font-bold px-4 py-2 rounded-xl hover:bg-orange-600 transition-all">Login</Button>
@@ -64,7 +84,7 @@ const Navbar = () => {
 
               <AnimatePresence>
                 {isDropdownOpen && (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
                     className="absolute right-0 top-14 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 z-50"
                   >
@@ -75,7 +95,7 @@ const Navbar = () => {
                     <div className="py-2">
                       {[ { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
                          { name: "Add Item", path: "/add-product", icon: PlusCircle },
-                         { name: "Manage Items", path: "/items/manage", icon: Package }
+                         { name: "Manage Items", path: "/cart", icon: Package }
                       ].map((item) => (
                         <Link key={item.path} href={item.path} onClick={() => setIsDropdownOpen(false)} className="flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-orange-50 rounded-xl transition-colors">
                           <item.icon size={18} className="text-orange-600" /> {item.name}
@@ -107,12 +127,13 @@ const Navbar = () => {
               </div>
               <div className="flex flex-col gap-6 font-bold text-gray-700">
                 <Link href="/" className="flex items-center gap-2 p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}><Home size={20}/>Home <ChevronRight size={18}/></Link>
-                <Link href="/productsPage" className="flex items-center gap-2  p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}><Package size={20}/>Products <ChevronRight size={18}/></Link>
-                <Link href="/About" className="flex items-center gap-2  p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}> <Info size={20}/>About <ChevronRight size={18}/></Link>
+                <Link href="/productsPage" className="flex items-center gap-2 p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}><Package size={20}/>Products <ChevronRight size={18}/></Link>
+                <Link href="/cart" className="flex items-center gap-2 p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}><ShoppingCart size={20}/>Cart <ChevronRight size={18}/></Link>
+                <Link href="/About" className="flex items-center gap-2 p-2 rounded-xl hover:bg-orange-50" onClick={() => setIsSidebarOpen(false)}><Info size={20}/>About <ChevronRight size={18}/></Link>
                 {!session && (
                   <>
-                   <Button onPress={() => router.push("/auth/LogIn")} variant="light" className="bg-orange-500 text-white font-bold px-4 py-2 rounded-xl hover:bg-orange-600 transition-all">Login</Button>
-              <Button onPress={() => router.push("/auth/RegisterPage")} className="bg-orange-500 text-white font-bold px-4 py-2 rounded-xl hover:bg-orange-600 transition-all">Register</Button>
+                    <Button onPress={() => router.push("/auth/LogIn")} variant="light" className="bg-orange-500 text-white font-bold px-4 py-2 rounded-xl hover:bg-orange-600 transition-all">Login</Button>
+                    <Button onPress={() => router.push("/auth/RegisterPage")} className="bg-orange-500 text-white font-bold px-4 py-2 rounded-xl hover:bg-orange-600 transition-all">Register</Button>
                   </>
                 )}
               </div>

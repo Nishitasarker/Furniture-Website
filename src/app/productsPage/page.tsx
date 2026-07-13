@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 
 const ProductPage = () => {
@@ -100,9 +101,9 @@ const ProductPage = () => {
                         <span className="text-[10px] bg-slate-100 px-2 py-1 rounded-md text-slate-600">{product.category}</span>
                       </div>
                     </div>
-                    <button className="w-full bg-gray-500 text-white py-3 rounded-xl font-semibold hover:bg-orange-500 transition-colors">
-                      View Details
-                    </button>
+                    <Link href={`/productsPage/${product.id}`} className="w-full">
+             <button className="w-full bg-gray-500 text-white py-3 rounded-xl font-semibold hover:bg-orange-500 transition-colors">
+ View Details</button> </Link>
                   </motion.div>
                 ))}
               </AnimatePresence>

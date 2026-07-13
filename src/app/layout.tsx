@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer"
 import { Toaster } from "react-hot-toast";
 import 'react-toastify/dist/ReactToastify.css';
+import { CartProvider } from '@/context/CartContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,15 +34,17 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {/* Toaster যোগ করুন যাতে toast.success কাজ করে */}
-        <Toaster position="top-right" />
-        
+        {/* <Toaster position="top-right" /> */}
+         <CartProvider>  
         {/* Navbar এখানে থাকবে */}
         <Navbar />
         
         {/* মেইন কন্টেন্ট */}
+        
         <main className="flex-grow">
           {children}
         </main>
+        </CartProvider>
         <Footer/>
       </body>
     </html>
