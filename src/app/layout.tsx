@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar"; 
-import Footer from "@/components/Footer"
+import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
-import 'react-toastify/dist/ReactToastify.css';
 import { CartProvider } from '@/context/CartContext';
 
 const geistSans = Geist({
@@ -18,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "RecipeHub",
-  description: "আপনার পছন্দের সব রেসিপি",
+  title: "FURNS | Premium Furniture Store",
+  description: "Elevate your living space with FURNS. Modern, hand-crafted furniture for your home.",
 };
 
 export default function RootLayout({
@@ -32,20 +31,18 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {/* Toaster যোগ করুন যাতে toast.success কাজ করে */}
-        {/* <Toaster position="top-right" /> */}
-         <CartProvider>  
-        {/* Navbar এখানে থাকবে */}
-        <Navbar />
-        
-        {/* মেইন কন্টেন্ট */}
-        
-        <main className="flex-grow">
-          {children}
-        </main>
+      {/* Applying bg-slate-50 here ensures the entire site has your light gray base */}
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900">
+        <CartProvider>
+          <Toaster position="top-right" />
+          <Navbar />
+          
+          <main className="flex-grow">
+            {children}
+          </main>
+          
+          <Footer />
         </CartProvider>
-        <Footer/>
       </body>
     </html>
   );

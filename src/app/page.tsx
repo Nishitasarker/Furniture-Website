@@ -5,6 +5,8 @@ import { Button } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import CategorySection from "@/components/CategorySection";
+import FeaturedSection from "@/components/FeaturedSection";
+import {FlashSale} from "@/components/FlashSale";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Testimonials from "@/components/CustomerTestimonials"
 import BlogSection from "@/components/InteriorDesignTips";
@@ -84,6 +86,8 @@ const HeroSection = () => {
       </div>
     </section>
     <CategorySection></CategorySection>
+    <FeaturedSection></FeaturedSection>
+    <FlashSale></FlashSale>
     <WhyChooseUs></WhyChooseUs>
     <Testimonials></Testimonials>
     <BlogSection></BlogSection>

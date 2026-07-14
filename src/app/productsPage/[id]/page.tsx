@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import Spinner from '@/components/Spinner';
 
 interface Product {
   _id: string;
@@ -107,8 +108,16 @@ const handleLikeToggle = async () => {
     }
   };
 
-  if (loading) return <div className="p-20 text-center text-slate-500">Loading details...</div>;
-  if (!product) return <div className="p-20 text-center text-red-500">Product not found!</div>;
+ if (loading) return (
+  <div className="min-h-screen flex items-center justify-center bg-slate-50">
+    <Spinner />
+  </div>
+);
+
+if (!product) return (
+  <div className="p-20 text-center text-red-500">Product not found!</div>
+);
+
 
   return (
     <section className="bg-slate-50 min-h-screen py-12 px-6">
