@@ -28,6 +28,39 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('description');
   const [adding, setAdding] = useState(false);
+  const [likes, setLikes] = useState(0);
+const [isLiked, setIsLiked] = useState(false);
+
+useEffect(() => {
+  if (product) {
+    setLikes(product.likes || 0);
+    setIsLiked(product.react || false); // স্কিমা অনুযায়ী 'react' মানেই হলো ইউজার লাইক দিয়েছে কি না
+  }
+}, [product]);
+
+const handleLikeToggle = async () => {
+  const newLikedState = !isLiked;
+  const increment = newLikedState ? 1 : -1;
+
+  // Optimistic UI Update
+  setIsLiked(newLikedState);
+  setLikes((prev) => prev + increment);
+
+  try {
+    const res = await fetch(`/api/products/${id}/like`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ increment }),
+    });
+
+    if (!res.ok) throw new Error("Failed to update");
+  } catch (err) {
+    // এরর হলে আগের অবস্থায় ফেরত যান
+    setIsLiked(!newLikedState);
+    setLikes((prev) => prev - increment);
+    console.error("Error:", err);
+  }
+};
 
   useEffect(() => {
     if (!id) return;
@@ -79,42 +112,61 @@ const ProductDetails = () => {
 
   return (
     <section className="bg-slate-50 min-h-screen py-12 px-6">
-      <div className="max-w-6xl mx-auto mb-8">
-        <p className="text-sm text-slate-400 mb-2">Home / Product / {product.name}</p>
-        <h1 className="text-3xl font-bold text-slate-800">{product.name}</h1>
-      </div>
+     <div className="max-w-6xl mx-auto mb-10 text-center">
+    <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
+      {product.name}
+    </h1>
+    <p className="text-slate-500 text-lg">
+      Experience the perfect blend of luxury and craftsmanship from FRUNS.
+    </p>
+  </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-        className="max-w-6xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-slate-100 grid md:grid-cols-2 gap-12"
+     <motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  className="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-sm border border-slate-100 grid md:grid-cols-2 gap-8 items-center"
+>
+  {/* Image section with controlled size */}
+  <div className="w-full">
+    <img 
+      src={product.imageUrl} 
+      alt={product.name} 
+      className="w-full h-72 object-cover rounded-xl shadow-md" 
+    />
+  </div>
+
+  {/* Info section */}
+  <div className="flex flex-col">
+    <p className="text-xs text-slate-400 mb-2">
+      Availability: {product.stockCount > 0 ? `${product.stockCount} in stock` : 'Out of stock'}
+    </p>
+    <h2 className="text-2xl font-bold text-slate-800 mb-2">{product.name}</h2>
+    <div className="text-2xl font-bold text-orange-500 mb-4">${product.price}</div>
+    <p className="text-slate-600 text-sm mb-6 line-clamp-3">{product.description}</p>
+
+    <div className="flex items-center gap-3">
+      <button
+        onClick={handleAddToCart}
+        disabled={adding || product.stockCount === 0}
+        className="bg-orange-500 text-white px-8 py-2.5 rounded-lg font-bold text-sm hover:bg-orange-600 transition disabled:opacity-50"
       >
-        <img src={product.imageUrl} alt={product.name} className="w-full h-auto rounded-xl shadow-md" />
-
-        <div className="flex flex-col">
-          <p className="text-sm text-slate-500 mb-1">
-            Availability: {product.stockCount > 0 ? `${product.stockCount} in stock` : 'Out of stock'}
-          </p>
-          <h2 className="text-2xl font-bold text-slate-800 mb-2">{product.name}</h2>
-          <div className="text-3xl font-bold text-orange-500 mb-6">${product.price}</div>
-          <p className="text-slate-600 mb-6">{product.description}</p>
-
-          <div className="flex items-center gap-4 mb-8">
-            <button
-              onClick={handleAddToCart}
-              disabled={adding || product.stockCount === 0}
-              className="bg-orange-500 text-white px-10 py-3 rounded-lg font-bold hover:bg-orange-600 transition disabled:opacity-50"
-            >
-              {adding ? "Adding..." : "Add to Cart"}
-            </button>
-            <button className="border border-slate-300 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-100">
-              ❤️ {product.likes}
-            </button>
-          </div>
-        </div>
-      </motion.div>
-
+        {adding ? "Adding..." : "Add to Cart"}
+      </button>
+      <button 
+  onClick={handleLikeToggle}
+  className={`border px-4 py-2.5 rounded-lg text-sm transition flex items-center gap-2 ${
+    isLiked 
+      ? 'border-orange-500 bg-orange-50 text-orange-600' 
+      : 'border-slate-200 text-slate-500 hover:bg-slate-100'
+  }`}
+>
+  {isLiked ? '❤️' : '🤍'} {likes}
+</button>
+    </div>
+  </div>
+</motion.div>
       {/* Tabs */}
-      <div className="max-w-6xl mx-auto mt-12 bg-white p-8 rounded-2xl border border-slate-100">
+      {/* <div className="max-w-6xl mx-auto mt-12 bg-white p-8 rounded-2xl border border-slate-100">
         <div className="flex gap-8 border-b border-slate-200 mb-6">
           {['Description', 'Additional Info', 'Reviews'].map((tab) => (
             <button
@@ -139,7 +191,7 @@ const ProductDetails = () => {
             {product.description}
           </motion.p>
         </AnimatePresence>
-      </div>
+      </div> */}
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
