@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff; /* সাদা */
-  --foreground: #171717; /* গাঢ় ধূসর টেক্সটের জন্য */
+  --background: #ffffff; 
+  --foreground: #171717; 
 }
 
 @theme inline {
@@ -12,7 +12,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* এই অংশটি সরিয়ে ফেলুন বা কমেন্ট আউট করে দিন */
+
 /*
 @media (prefers-color-scheme: dark) {
   :root {

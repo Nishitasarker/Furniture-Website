@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Product } from '@root/models/Product';
 import { connectDB } from '@/lib/db';
 
-// GET: সব প্রোডাক্ট পাওয়ার জন্য
+
 export async function GET() {
   try {
     await connectDB();
@@ -13,7 +13,7 @@ export async function GET() {
   }
 }
 
-// POST: নতুন প্রোডাক্ট যোগ করার জন্য
+
 export async function POST(req: Request) {
   try {
     await connectDB();

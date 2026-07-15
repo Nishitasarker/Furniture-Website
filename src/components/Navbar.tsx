@@ -25,8 +25,7 @@ const CartIcon = () => {
 };
 
 const Navbar = () => {
-  // ১. সব হুক সবসময় সবার আগে, কোনো early return ছাড়াই কল করতে হবে
-  const { data: session } = authClient.useSession();
+    const { data: session } = authClient.useSession();
   const pathname = usePathname();
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -41,8 +40,7 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // ২. সব হুক কল হয়ে যাওয়ার পর এখন এই conditional return নিরাপদ
-  if (pathname.startsWith('/dashboard')) {
+   if (pathname.startsWith('/dashboard')) {
     return null;
   }
 

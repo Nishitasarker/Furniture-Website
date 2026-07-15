@@ -9,13 +9,13 @@ export async function POST(
   try {
     await connectDB();
     const { id } = await params;
-    const { increment } = await req.json(); // ফ্রন্টএন্ড থেকে আসা +1 বা -1
+    const { increment } = await req.json(); 
 
-    // $inc ব্যবহার করে ডাটাবেজে আপডেট করুন
+   
     const updatedProduct = await Product.findOneAndUpdate(
-      { id: id }, // আপনার প্রোডাক্টের unique ID ফিল্ড
+      { id: id }, 
       { $inc: { likes: increment } },
-      { new: true } // আপডেট হওয়ার পর নতুন ডাটা রিটার্ন করবে
+      { new: true } 
     );
 
     if (!updatedProduct) {

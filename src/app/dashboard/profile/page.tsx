@@ -9,7 +9,7 @@ export default async function ProfilePage() {
     return <div className="p-10 text-center text-red-500">Please log in to view your profile.</div>;
   }
 
-  // MongoDB থেকে আসা ডাটা অনুযায়ী ডাটা স্ট্রাকচার
+  
   const userData = {
     name: session.user.name || "",
     email: session.user.email || "",

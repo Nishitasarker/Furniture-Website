@@ -79,7 +79,7 @@ const CartPage = () => {
                   ${(item.price * item.quantity).toFixed(2)}
                 </p>
 
-                {/* সম্পূর্ণ remove (quantity যাই থাকুক) */}
+                
                 <button
                   onClick={() => removeFromCart(item.productId, true)}
                   className="text-slate-400 hover:text-red-500 p-2"
@@ -98,9 +98,7 @@ const CartPage = () => {
             <p className="text-slate-500 text-sm">Total ({items.reduce((s, i) => s + i.quantity, 0)} items)</p>
             <p className="text-2xl font-black text-slate-900">${total.toFixed(2)}</p>
           </div>
-          <button className="bg-orange-500 text-white px-10 py-3 rounded-xl font-bold hover:bg-orange-600 transition">
-            Proceed to Checkout
-          </button>
+          <p className="text-2xl font-black text-slate-900">${total.toFixed(2)}</p>
         </div>
       </div>
     </section>

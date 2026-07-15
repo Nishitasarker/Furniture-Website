@@ -41,7 +41,7 @@ const RegisterPage: React.FC = () => {
     const image = (formData.get("image") as string) || "/user.png";
 
     try {
-      // Better Auth এর মাধ্যমে সরাসরি রেজিস্ট্রেশন
+     
       await authClient.signUp.email({
         name,
         email,

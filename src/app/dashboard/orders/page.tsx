@@ -12,7 +12,7 @@ export default async function OrdersPage() {
     return <div className="p-8">Please login to view your orders.</div>;
   }
 
-  // ডাটাবেস থেকে ইউজারের কার্ট আইটেমগুলো আনা
+ 
   const cart = await Cart.findOne({ userEmail: session.user.email }).lean();
 const orders = cart?.items ? JSON.parse(JSON.stringify(cart.items)) : [];
 

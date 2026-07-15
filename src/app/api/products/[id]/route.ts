@@ -8,7 +8,7 @@ export async function GET(
 ) {
   try {
     await connectDB();
-    const { id } = await params; // ← await যোগ করো এখানে
+    const { id } = await params; 
 
     const product = await Product.findOne({ id: id });
 

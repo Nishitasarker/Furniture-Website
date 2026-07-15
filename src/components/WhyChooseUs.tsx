@@ -16,19 +16,19 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2 } // প্রতিটি কার্ডের মাঝে সুন্দর গ্যাপ
+    transition: { staggerChildren: 0.2 } 
   }
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50 }, // নিচে থেকে উপরে উঠবে
+  hidden: { opacity: 0, y: 50 }, 
   visible: { 
     opacity: 1, 
     y: 0, 
     transition: { 
       type: "spring" as const, 
-      stiffness: 80, // এটি কমিয়ে বাড়ানো যায় স্মুথনেস কন্ট্রোলের জন্য
-      damping: 12,    // এটি স্প্রিংয়ের বাউন্স কমায় বা বাড়ায়
+      stiffness: 80, 
+      damping: 12,    
       duration: 0.6 
     } 
   }

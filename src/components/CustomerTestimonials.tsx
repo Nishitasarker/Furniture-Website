@@ -32,7 +32,7 @@ const testimonials = [
   }
 ];
 
-// সেকশন কন্টেইনার অ্যানিমেশন
+
 const sectionVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -42,7 +42,7 @@ const sectionVariants = {
   }
 };
 
-// স্লাইডার কন্টেন্ট ট্রানজিশন ইফেক্ট
+
 const slideVariants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 100 : -100,

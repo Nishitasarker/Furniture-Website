@@ -6,7 +6,7 @@ import { useCart } from "@/context/CartContext";
 
 export const FlashSale = () => {
   const { data: session } = useSession();
-  const { addToCart } = useCart(); // হুকটি এখানে সঠিকভাবে কল হয়েছে
+  const { addToCart } = useCart(); 
   const [products, setProducts] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 3;

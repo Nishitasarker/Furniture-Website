@@ -8,14 +8,14 @@ export async function updateProfile(prevState: any, formData: FormData) {
   const name = formData.get('name') as string;
   
   try {
-    // ১. headers() একবার কল করুন
+   
     const headerList = await headers();
     
-    // ২. সেশন ভ্যালিডেশন
+   
     const session = await auth.api.getSession({ headers: headerList });
     if (!session?.user?.id) return { success: false, message: "Unauthorized" };
 
-    // ৩. আপডেট অপারেশন
+  
     await auth.api.updateUser({
       headers: headerList,
       body: { name: name },

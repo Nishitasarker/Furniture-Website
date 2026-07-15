@@ -1,16 +1,16 @@
 import { NextResponse } from 'next/server';
 import { Cart } from '@root/models/Cart';
 import { connectDB } from '@/lib/db';
-import { auth } from '@/lib/auth'; // তোমার better-auth instance এর path বসাও
+import { auth } from '@/lib/auth'; 
 
-// GET: লগইন করা user এর cart আনা
+
 export async function GET(req: Request) {
   try {
     await connectDB();
     const session = await auth.api.getSession({ headers: req.headers });
 
     if (!session?.user?.email) {
-      return NextResponse.json({ items: [] }, { status: 200 }); // লগইন না থাকলে খালি cart
+      return NextResponse.json({ items: [] }, { status: 200 }); 
     }
 
     const cart = await Cart.findOne({ userEmail: session.user.email });

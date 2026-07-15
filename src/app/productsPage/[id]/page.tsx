@@ -37,7 +37,7 @@ const [isLiked, setIsLiked] = useState(false);
 useEffect(() => {
   if (product) {
    setLikes(product.likes ?? 0);
-   setIsLiked(product.react ?? false); // স্কিমা অনুযায়ী 'react' মানেই হলো ইউজার লাইক দিয়েছে কি না
+   setIsLiked(product.react ?? false); 
   }
 }, [product]);
 
@@ -58,7 +58,7 @@ const handleLikeToggle = async () => {
 
     if (!res.ok) throw new Error("Failed to update");
   } catch (err) {
-    // এরর হলে আগের অবস্থায় ফেরত যান
+    
     setIsLiked(!newLikedState);
     setLikes((prev) => prev - increment);
     console.error("Error:", err);
@@ -74,7 +74,7 @@ const handleLikeToggle = async () => {
         setProduct(data);
         setLoading(false);
 
-        // একই category এর related product আনা
+        
         if (data?.category) {
           fetch(`/api/products`)
             .then((res) => res.json())

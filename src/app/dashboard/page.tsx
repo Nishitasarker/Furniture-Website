@@ -13,7 +13,6 @@ export default async function DashboardPage() {
   const totalStock = await Product.aggregate([{ $group: { _id: null, total: { $sum: "$stockCount" } } }]);
   const categories = await Product.distinct("category");
   
-  // ক্যাটাগরি অনুযায়ী প্রোডাক্টের সংখ্যা (Pie Chart এর জন্য)
   const categoryData = await Product.aggregate([
     { $group: { _id: "$category", count: { $sum: 1 } } }
   ]);
@@ -21,8 +20,8 @@ export default async function DashboardPage() {
   const userCart = session ? await Cart.findOne({ userEmail: session.user.email }) : null;
   const cartItemsCount = userCart?.items.length || 0;
   
-  // আপনার কন্ডিশন অনুযায়ী 'Contributed' প্রোডাক্ট
-  const contributedCount = await Product.countDocuments({ /* আপনার ফিল্টার */ });
+  
+  const contributedCount = await Product.countDocuments();
 
   return (
     <div className="p-6">

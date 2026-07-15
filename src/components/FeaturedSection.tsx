@@ -8,14 +8,13 @@ export default function FeaturedSection() {
   const [loading, setLoading] = useState(true);
 
  useEffect(() => {
-    // ডেটা ফেচিং শুরু হওয়ার সময় loading true থাকবে
-    fetch('/api/products/featured')
+        fetch('/api/products/featured')
       .then(res => res.json())
       .then(data => {
         setProducts(data);
-        setLoading(false); // ডেটা চলে আসলে loading false করে দিবো
+        setLoading(false); 
       })
-      .catch(() => setLoading(false)); // এরর হ্যান্ডলিং
+      .catch(() => setLoading(false)); 
   }, []);
 
 
@@ -28,13 +27,13 @@ export default function FeaturedSection() {
           Featured <span className="text-orange-500">Collection</span>
         </h2>
         
-        {/* লোডিং অবস্থায় spinner দেখাবে */}
+       
         {loading ? (
           <div className="flex justify-center items-center py-20">
             <div className="w-12 h-12 border-4 border-slate-200 border-t-orange-500 rounded-full animate-spin"></div>
           </div>
         ) : (
-          /* ডেটা চলে আসলে গ্রিডটি দেখাবে */
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {products.map((p: any) => (
               <motion.div 

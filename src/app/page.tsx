@@ -19,18 +19,17 @@ const slides = [
   { id: 3, title: "Elevated Dining Experience", desc: "Create unforgettable moments with high-end dining sets designed for both elegance and durability.", image: "/dining.jpg" },
 ];
 
-// কন্টেইনার ভ্যারিয়েন্ট - যা ক্রমানুসারে উপাদানগুলো আনবে
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3, // প্রতি উপাদানের মাঝে ০.৩ সেকেন্ডের বিরতি
+      staggerChildren: 0.3, 
     },
   },
 };
 
-// চাইল্ড ভ্যারিয়েন্ট - প্রতিটি লাইনের জন্য
+
 const childVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, 

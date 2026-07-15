@@ -12,7 +12,7 @@ const COLORS = ['#f97316', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6', '#eab308'
 
 
 
-// এনিমেশন ভেরিয়েন্টস
+
 
 const containerVariants = {
 

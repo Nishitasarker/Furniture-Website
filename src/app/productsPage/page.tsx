@@ -12,7 +12,7 @@ const ProductPage = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // ফিল্টার ও কন্ট্রোল স্টেট
+  
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [sortBy, setSortBy] = useState("newest");
@@ -26,7 +26,7 @@ const ProductPage = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // ফিল্টারিং ও সর্টিং লজিক
+ 
   const filteredProducts = useMemo(() => {
     let filtered = products.filter(p => 
       (category === "All" || p.category === category) &&
@@ -47,7 +47,7 @@ const ProductPage = () => {
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-black text-slate-900 mb-8">Our Collection</h1>
 
-        {/* সার্চ ও ফিল্টার প্যানেল */}
+       
         <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 text-gray-500 mb-8 flex flex-wrap gap-4 items-center">
           <input 
             type="text" placeholder="Search furniture..." className="flex-grow p-3 bg-slate-50 rounded-xl outline-none focus:ring-2 focus:ring-orange-500"
@@ -67,7 +67,7 @@ const ProductPage = () => {
           </select>
         </div>
 
-        {/* প্রোডাক্ট গ্রিড */}
+       
         <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f1f5f9">
           <motion.div 
             layout

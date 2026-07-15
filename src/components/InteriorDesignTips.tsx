@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, X, CheckCircle2 } from "lucide-react";
 
-// Modal Component - এখন এখানে টিপসগুলো সুন্দরভাবে সাজানো থাকবে
 const Modal = ({ post, onClose }: { post: any; onClose: () => void }) => (
   <motion.div
     initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
@@ -20,8 +19,7 @@ const Modal = ({ post, onClose }: { post: any; onClose: () => void }) => (
       <img src={post.image} alt={post.title} className="w-full h-72 object-cover rounded-2xl mb-6 shadow-md" />
       <h2 className="text-3xl font-bold mb-4 text-gray-900">{post.title}</h2>
       
-      {/* বিস্তারিত টিপস সেকশন */}
-      <div className="space-y-6 text-gray-700">
+           <div className="space-y-6 text-gray-700">
         <p className="text-lg leading-relaxed">{post.fullDetails}</p>
         
         <div>
