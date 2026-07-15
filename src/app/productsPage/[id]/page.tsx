@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import Spinner from '@/components/Spinner';
 
+
 interface Product {
   _id: string;
   id: string;
@@ -17,7 +18,8 @@ interface Product {
   category: string;
   stockCount: number;
   tags: string[];
-  likes: number;
+  likes: number;  
+  react: boolean;
 }
 
 const ProductDetails = () => {
@@ -34,8 +36,8 @@ const [isLiked, setIsLiked] = useState(false);
 
 useEffect(() => {
   if (product) {
-    setLikes(product.likes || 0);
-    setIsLiked(product.react || false); // স্কিমা অনুযায়ী 'react' মানেই হলো ইউজার লাইক দিয়েছে কি না
+   setLikes(product.likes ?? 0);
+   setIsLiked(product.react ?? false); // স্কিমা অনুযায়ী 'react' মানেই হলো ইউজার লাইক দিয়েছে কি না
   }
 }, [product]);
 

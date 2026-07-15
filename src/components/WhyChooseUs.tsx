@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Variants } from "framer-motion";
 import { motion } from "framer-motion";
 import { ShieldCheck, Truck, Recycle, Headphones } from "lucide-react";
 
@@ -25,7 +26,7 @@ const cardVariants = {
     opacity: 1, 
     y: 0, 
     transition: { 
-      type: "spring", 
+      type: "spring" as const, 
       stiffness: 80, // এটি কমিয়ে বাড়ানো যায় স্মুথনেস কন্ট্রোলের জন্য
       damping: 12,    // এটি স্প্রিংয়ের বাউন্স কমায় বা বাড়ায়
       duration: 0.6 

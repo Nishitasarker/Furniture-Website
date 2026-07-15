@@ -1,4 +1,20 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, Model } from 'mongoose';
+
+
+export interface IProduct extends Document {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  imageUrl: string;
+  description?: string;
+  isFeatured: boolean;
+  stockCount: number;
+  likes: number;
+  react: boolean; // এখানে এটি ডিফাইন করা আছে
+  tags: string[];
+  createdAt: Date;
+}
 
 const ProductSchema = new mongoose.Schema({
   // সাধারণত MongoDB তে _id ব্যবহার করাই ভালো, তবে আপনার স্ট্রাকচার অনুযায়ী:
@@ -17,4 +33,4 @@ const ProductSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-export const Product = mongoose.models.Product || mongoose.model('Product', ProductSchema);
+export const Product: Model<IProduct> = mongoose.models.Product || mongoose.model<IProduct>('Product', ProductSchema);

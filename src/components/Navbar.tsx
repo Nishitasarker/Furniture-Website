@@ -71,7 +71,7 @@ const Navbar = () => {
           <CartIcon />
           {!session ? (
             <div className="hidden md:flex gap-3">
-              <Button onPress={() => router.push("/auth/LogIn")} variant="light" className="bg-orange-500 text-white font-bold px-4 py-2 rounded-xl hover:bg-orange-600 transition-all">Login</Button>
+              <Button onPress={() => router.push("/auth/LogIn")} variant="ghost" className="bg-orange-500 text-white font-bold px-4 py-2 rounded-xl hover:bg-orange-600 transition-all">Login</Button>
               <Button onPress={() => router.push("/auth/RegisterPage")} className="bg-orange-500 text-white font-bold px-4 py-2 rounded-xl hover:bg-orange-600 transition-all">Register</Button>
             </div>
           ) : (

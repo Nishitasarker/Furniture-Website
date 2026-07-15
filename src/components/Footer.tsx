@@ -13,10 +13,10 @@ import {
 const Footer = () => {
   const [email, setEmail] = useState('');
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) {
-      alert(`Thank you for subscribing with: ${email}`);
+  const handleSubscribe = (e: React.FormEvent) => {
+  e.preventDefault();
+  if (email) {
+    alert(`Thank you for subscribing with: ${email}`);
       setEmail('');
     }
   };
@@ -101,7 +101,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 mt-12 pt-8 border-t border-gray-400 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-sm text-gray-500">&copy; 2026 FurniStore. All rights reserved.</p>
         <div className="flex gap-6 text-xl text-gray-600">
-          <a href="#" className="hover:text-orange-600 transition-colors" aria-label="Facebook"><FaFacebookF /></a>
+          <a href="https://www.facebook.com/100080777081861/posts/962049083164319/?substory_index=1745046966465629&app=fbl" className="hover:text-orange-600 transition-colors" aria-label="Facebook"><FaFacebookF /></a>
           <a href="https://wa.me/8801859384536" className="hover:text-orange-600 transition-colors" aria-label="WhatsApp"><FaWhatsapp /></a>
           <a href="https://www.linkedin.com/in/nishitasarkerjui" className="hover:text-orange-600 transition-colors" aria-label="LinkedIn"><FaLinkedinIn /></a>
           <a href="mailto:nishitasarkerjui@example.com?subject=Inquiry%20from%20Website&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20furniture. " className="hover:text-orange-600 transition-colors" aria-label="Email"><FaEnvelope /></a>

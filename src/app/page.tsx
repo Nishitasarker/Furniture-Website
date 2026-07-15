@@ -1,5 +1,5 @@
 "use client";
-
+import { Variants } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { Button } from "@heroui/react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -33,7 +33,8 @@ const containerVariants = {
 // চাইল্ড ভ্যারিয়েন্ট - প্রতিটি লাইনের জন্য
 const childVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  visible: { opacity: 1, y: 0, 
+  transition: { duration: 0.6, ease: "easeOut" as const} },
 };
 
 const HeroSection = () => {

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Variants } from "framer-motion";
 
 const testimonials = [
   {
@@ -37,7 +38,7 @@ const sectionVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring", stiffness: 60, damping: 15, duration: 0.8 }
+    transition: { type: "spring" as const, stiffness: 60, damping: 15, duration: 0.8 }
   }
 };
 
@@ -50,7 +51,7 @@ const slideVariants = {
   center: {
     x: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 80, damping: 14 }
+    transition: { type: "spring" as const, stiffness: 80, damping: 14 }
   },
   exit: (direction: number) => ({
     x: direction < 0 ? 100 : -100,

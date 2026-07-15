@@ -18,18 +18,19 @@
         "name": "next"
       }
     ],
-    "paths": {
+ "paths": {
   "@/*": ["./src/*"],
   "@root/*": ["./*"]
 }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
-    "**/*.mts"
-  ],
+ "include": [
+  "next-env.d.ts",
+  "**/*.ts",
+  "**/*.tsx",
+  ".next/types/**/*.ts",
+  ".next/dev/types/**/*.ts",
+  "**/*.mts",
+  "models/**/*" 
+],
   "exclude": ["node_modules"]
 }
