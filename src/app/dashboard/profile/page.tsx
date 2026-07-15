@@ -21,7 +21,7 @@ export default async function ProfilePage() {
     <div className=" mx-auto p-6">
       <div className="mb-8 border-l-4 border-orange-600 pl-4">
     <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight">
-      My Profile <span className="text-orange-600">@Furns</span>
+      My Profile <span className="text-orange-600">Furns</span>
     </h1>
     <p className="text-gray-500 mt-2 text-lg">
       Manage your personal space and account preferences.

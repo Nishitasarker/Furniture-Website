@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FcGoogle } from "react-icons/fc";
 
 import {
   Card,
@@ -110,7 +111,7 @@ const LogInPage: React.FC = () => {
           className="w-full py-3 flex items-center justify-center gap-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all font-medium text-gray-700"
         >
           {/* Google Icon SVG code here */}
-          Login with Google
+         <FcGoogle /> Login with Google
         </button>
       </Card>
     </div>

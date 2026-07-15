@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { Sofa } from 'lucide-react';
 
 import { 
   FaFacebookF, 
@@ -27,7 +28,8 @@ const Footer = () => {
         
         {/* Brand Section */}
         <div className="space-y-4">
-          <h2 className="text-3xl font-bold text-orange-600">FurniStore</h2>
+          <Sofa size={32} className="text-orange-600" />
+          <span className="text-3xl font-bold text-gray-800 tracking-tight" style={{ fontFamily: 'Rajdhani, sans-serif' }}>FURNS</span>
           <p className="text-sm leading-relaxed text-gray-600">
             Transforming your living spaces with premium furniture. Quality craftsmanship meets modern design for your absolute comfort.
           </p>
@@ -68,7 +70,7 @@ const Footer = () => {
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-orange-600" /> 
               <a href="mailto:nishitasarkerjui@example.com?subject=Inquiry%20from%20Website&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20furniture." className="hover:text-orange-600 transition-colors">
-    nishitasarkerjui@gmail.com </a>
+                 nishitasarkerjui@gmail.com </a>
             </li>
             <li className="flex items-center gap-3">
               <FaWhatsapp className="text-orange-600" /> 

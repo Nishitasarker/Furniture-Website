@@ -8,6 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Card, Form, Input, Label, TextField, Description } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
+import { FcGoogle } from "react-icons/fc";
+
 
 const RegisterPage: React.FC = () => {
   const router = useRouter();
@@ -128,7 +130,7 @@ const RegisterPage: React.FC = () => {
           onClick={handleGoogleLogin}
           className="w-full py-3 flex items-center justify-center gap-2 rounded-xl font-semibold text-sm text-red-700 bg-white border-2 border-red-100 hover:bg-red-50 transition-all"
         >
-          Continue with Google
+        <FcGoogle/>  Continue with Google
         </button>
       </Card>
     </div>
