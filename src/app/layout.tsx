@@ -29,10 +29,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       {/* Applying bg-slate-50 here ensures the entire site has your light gray base */}
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900">
+      <body className="min-h-full flex flex-col bg-white text-slate-900">
         <CartProvider>
           <Toaster position="top-right" />
           <Navbar />

@@ -41,8 +41,8 @@ const Footer = () => {
               { name: 'Products', path: '/productsPage' },
               { name: 'About Us', path: '/About' },
               { name: 'Blog', path: '/interior-tips' },
-              { name: 'Contact', path: '#' }, // Placeholder since no page yet
-              { name: 'Terms & Conditions', path: '#' } // Placeholder since no policy yet
+              { name: 'Contact', path: 'mailto:nishitasarkerjui@gmail.com' }, // Placeholder since no page yet
+             // Placeholder since no policy yet
             ].map((link) => (
               <li key={link.name}>
                 <a href={link.path} className="hover:text-orange-600 transition-colors duration-300">
@@ -67,11 +67,12 @@ const Footer = () => {
             </li>
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-orange-600" /> 
-              <span>nishitasarkerjui.com</span>
+              <a href="mailto:nishitasarkerjui@example.com?subject=Inquiry%20from%20Website&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20furniture." className="hover:text-orange-600 transition-colors">
+    nishitasarkerjui@gmail.com </a>
             </li>
             <li className="flex items-center gap-3">
               <FaWhatsapp className="text-orange-600" /> 
-              <span>+880 1859384536</span>
+              <a  href="https://wa.me/8801859384536"  target="_blank"  rel="noopener noreferrer" className="hover:text-orange-600 transition-colors"> +880 1859384536 </a>
             </li>
           </ul>
         </div>
@@ -101,9 +102,9 @@ const Footer = () => {
         <p className="text-sm text-gray-500">&copy; 2026 FurniStore. All rights reserved.</p>
         <div className="flex gap-6 text-xl text-gray-600">
           <a href="#" className="hover:text-orange-600 transition-colors" aria-label="Facebook"><FaFacebookF /></a>
-          <a href="#" className="hover:text-orange-600 transition-colors" aria-label="WhatsApp"><FaWhatsapp /></a>
-          <a href="#" className="hover:text-orange-600 transition-colors" aria-label="LinkedIn"><FaLinkedinIn /></a>
-          <a href="#" className="hover:text-orange-600 transition-colors" aria-label="Email"><FaEnvelope /></a>
+          <a href="https://wa.me/8801859384536" className="hover:text-orange-600 transition-colors" aria-label="WhatsApp"><FaWhatsapp /></a>
+          <a href="https://www.linkedin.com/in/nishitasarkerjui" className="hover:text-orange-600 transition-colors" aria-label="LinkedIn"><FaLinkedinIn /></a>
+          <a href="mailto:nishitasarkerjui@example.com?subject=Inquiry%20from%20Website&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20furniture. " className="hover:text-orange-600 transition-colors" aria-label="Email"><FaEnvelope /></a>
         </div>
       </div>
     </footer>

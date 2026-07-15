@@ -11,6 +11,7 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Testimonials from "@/components/CustomerTestimonials"
 import BlogSection from "@/components/InteriorDesignTips";
 import NewsletterSocial from "@/components/NewsletterSocial";
+import Link from "next/link";
 
 const slides = [
   { id: 1, title: "Mastercrafted Comfort", desc: "Experience the perfect blend of ergonomic design and luxurious aesthetics tailored for your home.", image: "/sofa.jpg" },
@@ -78,9 +79,9 @@ const HeroSection = () => {
 
           {/* Button */}
           <motion.div variants={childVariants}>
-            <Button className="bg-orange-500 text-white font-bold px-8 py-4 rounded-xl hover:bg-orange-600 transition-all">
-              Shop Now
-            </Button>
+            <Link href="/productsPage">
+             <Button className="bg-orange-500 text-white font-bold px-8 py-4 rounded-xl hover:bg-orange-600 transition-all">
+      Shop Now</Button> </Link>
           </motion.div>
         </motion.div>
       </div>
