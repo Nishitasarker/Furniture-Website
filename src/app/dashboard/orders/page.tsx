@@ -18,7 +18,8 @@ const orders = cart?.items ? JSON.parse(JSON.stringify(cart.items)) : [];
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">My Orders</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-8 tracking-tight" style={{ fontFamily: 'Rajdhani, sans-serif' }}>
+       My Curated Collection </h1>
       <OrderTable orders={orders} />
     </div>
   );

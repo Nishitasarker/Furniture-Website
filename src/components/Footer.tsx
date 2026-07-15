@@ -28,12 +28,20 @@ const Footer = () => {
         
         {/* Brand Section */}
         <div className="space-y-4">
-          <Sofa size={32} className="text-orange-600" />
-          <span className="text-3xl font-bold text-gray-800 tracking-tight" style={{ fontFamily: 'Rajdhani, sans-serif' }}>FURNS</span>
-          <p className="text-sm leading-relaxed text-gray-600">
-            Transforming your living spaces with premium furniture. Quality craftsmanship meets modern design for your absolute comfort.
-          </p>
-        </div>
+  {/* Wrap the icon and name in a flex container with items-center */}
+  <div className="flex items-center gap-2">
+    <Sofa size={32} className="text-orange-600" />
+    <span 
+      className="text-3xl font-bold text-gray-800 tracking-tight" 
+      style={{ fontFamily: 'Rajdhani, sans-serif' }}
+    >
+      FURNS
+    </span>
+  </div>
+  <p className="text-sm leading-relaxed text-gray-600">
+    Transforming your living spaces with premium furniture. Quality craftsmanship meets modern design for your absolute comfort.
+  </p>
+</div>
 
         {/* Essential Links */}
         <div>
