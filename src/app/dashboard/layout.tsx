@@ -1,17 +1,26 @@
-import DashboardSidebar from "@/components/dashboard/Sidebar";
+'use client';
+import Sidebar from "@/components/dashboard/Sidebar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* Sidebar - সবসময় থাকবে */}
-      <aside className="w-64 bg-white border-r border-gray-200 hidden md:block">
+      {/* ডেস্কটপ সাইডবার */}
+      <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200">
         <div className="p-6 font-bold text-orange-600 text-2xl">FURNS</div>
-        <DashboardSidebar />
+        <Sidebar />
       </aside>
 
       {/* Main Content */}
-      <main className="flex-grow p-8">
-        {children}
+      <main className="flex-grow">
+        {/* মোবাইল হেডার - এক লাইনে থাকবে */}
+        <header className="md:hidden flex items-center justify-between p-4 bg-white border-b border-gray-200">
+          <div className="font-bold text-orange-600 text-xl">FURNS</div>
+          <Sidebar /> {/* এখানেই মেনু বাটনটি আসবে */}
+        </header>
+
+        <div className="p-4 md:p-8">
+          {children}
+        </div>
       </main>
     </div>
   );

@@ -25,10 +25,10 @@ const CartIcon = () => {
 };
 
 const Navbar = () => {
+  // ১. সব হুক সবসময় সবার আগে, কোনো early return ছাড়াই কল করতে হবে
   const { data: session } = authClient.useSession();
   const pathname = usePathname();
   const router = useRouter();
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -40,6 +40,11 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // ২. সব হুক কল হয়ে যাওয়ার পর এখন এই conditional return নিরাপদ
+  if (pathname.startsWith('/dashboard')) {
+    return null;
+  }
 
   const getDesktopLinkClass = (path: string) => 
     `font-semibold transition-colors pb-1 ${pathname === path ? "text-orange-600 border-b-2 border-orange-600" : "text-gray-600 hover:text-orange-600"}`;
@@ -55,6 +60,7 @@ const Navbar = () => {
           <span className="text-3xl font-bold text-gray-800 tracking-tight" style={{ fontFamily: 'Rajdhani, sans-serif' }}>FURNS</span>
         </Link>
 
+        {/* Desktop Links */}
         <div className="hidden lg:flex items-center gap-8">
           <Link href="/" className={getDesktopLinkClass("/")}>Home</Link>
           <Link href="/productsPage" className={getDesktopLinkClass("/productsPage")}>Products</Link>
@@ -83,12 +89,10 @@ const Navbar = () => {
                     initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
                     className="absolute right-0 top-14 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 z-50"
                   >
-                    {/* Professional User Info Header */}
                     <div className="px-4 py-3 bg-gray-50 rounded-xl mb-1">
                       <p className="font-bold text-gray-800 text-sm truncate">{session.user?.name}</p>
                       <p className="text-[11px] text-gray-500 truncate">{session.user?.email}</p>
                     </div>
-
                     <div className="py-2">
                       {[ 
                         { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
@@ -104,7 +108,6 @@ const Navbar = () => {
                          );
                       })}
                     </div>
-                    
                     <div className="border-t border-gray-100 pt-2">
                       <button onClick={async () => { await authClient.signOut(); router.push("/"); }} className="w-full flex items-center gap-3 text-red-500 hover:bg-red-50 font-bold px-4 py-2.5 rounded-xl transition-all">
                         <LogOut size={18} /> Logout
@@ -119,6 +122,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Sidebar */}
       <AnimatePresence>
         {isSidebarOpen && (
           <>
