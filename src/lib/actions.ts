@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache';
 
 export async function updateProfile(prevState: any, formData: FormData) {
   const name = formData.get('name') as string;
+  const image = formData.get('image') as string;
   
   try {
    
@@ -18,7 +19,11 @@ export async function updateProfile(prevState: any, formData: FormData) {
   
     await auth.api.updateUser({
       headers: headerList,
-      body: { name: name },
+      body: {
+         name: name ,
+         image: image
+        },
+      
     });
 
     revalidatePath('/dashboard/profile');
