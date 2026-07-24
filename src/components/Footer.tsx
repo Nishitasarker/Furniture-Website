@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Sofa } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 import { 
   FaFacebookF, 
@@ -13,11 +14,17 @@ import {
 
 const Footer = () => {
   const [email, setEmail] = useState('');
+  const pathname = usePathname();
+
+  // Dashboard বা এর অন্তর্গত যেকোনো পেজে গেলে Footer দেখাবে না
+  if (pathname.startsWith('/dashboard')) {
+    return null;
+  }
 
   const handleSubscribe = (e: React.FormEvent) => {
-  e.preventDefault();
-  if (email) {
-    alert(`Thank you for subscribing with: ${email}`);
+    e.preventDefault();
+    if (email) {
+      alert(`Thank you for subscribing with: ${email}`);
       setEmail('');
     }
   };
@@ -28,20 +35,19 @@ const Footer = () => {
         
         {/* Brand Section */}
         <div className="space-y-4">
-  {/* Wrap the icon and name in a flex container with items-center */}
-  <div className="flex items-center gap-2">
-    <Sofa size={32} className="text-orange-600" />
-    <span 
-      className="text-3xl font-bold text-gray-800 tracking-tight" 
-      style={{ fontFamily: 'Rajdhani, sans-serif' }}
-    >
-      FURNS
-    </span>
-  </div>
-  <p className="text-sm leading-relaxed text-gray-600">
-    Transforming your living spaces with premium furniture. Quality craftsmanship meets modern design for your absolute comfort.
-  </p>
-</div>
+          <div className="flex items-center gap-2">
+            <Sofa size={32} className="text-orange-600" />
+            <span 
+              className="text-3xl font-bold text-gray-800 tracking-tight" 
+              style={{ fontFamily: 'Rajdhani, sans-serif' }}
+            >
+              FURNS
+            </span>
+          </div>
+          <p className="text-sm leading-relaxed text-gray-600">
+            Transforming your living spaces with premium furniture. Quality craftsmanship meets modern design for your absolute comfort.
+          </p>
+        </div>
 
         {/* Essential Links */}
         <div>
@@ -51,8 +57,7 @@ const Footer = () => {
               { name: 'Products', path: '/productsPage' },
               { name: 'About Us', path: '/About' },
               { name: 'Blog', path: '/interior-tips' },
-              { name: 'Contact', path: 'mailto:nishitasarkerjui@gmail.com' }, // Placeholder since no page yet
-             // Placeholder since no policy yet
+              { name: 'Contact', path: 'mailto:nishitasarkerjui@gmail.com' },
             ].map((link) => (
               <li key={link.name}>
                 <a href={link.path} className="hover:text-orange-600 transition-colors duration-300">
@@ -63,7 +68,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Contact Info (Updated) */}
+        {/* Contact Info */}
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-6 border-l-4 border-orange-500 pl-3">Contact Us</h3>
           <ul className="space-y-4">
@@ -77,12 +82,15 @@ const Footer = () => {
             </li>
             <li className="flex items-center gap-3">
               <FaEnvelope className="text-orange-600" /> 
-              <a href="mailto:nishitasarkerjui@example.com?subject=Inquiry%20from%20Website&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20furniture." className="hover:text-orange-600 transition-colors">
-                 nishitasarkerjui@gmail.com </a>
+              <a href="mailto:nishitasarkerjui@gmail.com?subject=Inquiry%20from%20Website&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20furniture." className="hover:text-orange-600 transition-colors">
+                nishitasarkerjui@gmail.com 
+              </a>
             </li>
             <li className="flex items-center gap-3">
               <FaWhatsapp className="text-orange-600" /> 
-              <a  href="https://wa.me/8801859384536"  target="_blank"  rel="noopener noreferrer" className="hover:text-orange-600 transition-colors"> +880 1859384536 </a>
+              <a href="https://wa.me/8801859384536" target="_blank" rel="noopener noreferrer" className="hover:text-orange-600 transition-colors"> 
+                +880 1859384536 
+              </a>
             </li>
           </ul>
         </div>
@@ -114,7 +122,7 @@ const Footer = () => {
           <a href="https://www.facebook.com/100080777081861/posts/962049083164319/?substory_index=1745046966465629&app=fbl" className="hover:text-orange-600 transition-colors" aria-label="Facebook"><FaFacebookF /></a>
           <a href="https://wa.me/8801859384536" className="hover:text-orange-600 transition-colors" aria-label="WhatsApp"><FaWhatsapp /></a>
           <a href="https://www.linkedin.com/in/nishitasarkerjui" className="hover:text-orange-600 transition-colors" aria-label="LinkedIn"><FaLinkedinIn /></a>
-          <a href="mailto:nishitasarkerjui@example.com?subject=Inquiry%20from%20Website&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20furniture. " className="hover:text-orange-600 transition-colors" aria-label="Email"><FaEnvelope /></a>
+          <a href="mailto:nishitasarkerjui@gmail.com?subject=Inquiry%20from%20Website&body=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20furniture." className="hover:text-orange-600 transition-colors" aria-label="Email"><FaEnvelope /></a>
         </div>
       </div>
     </footer>
