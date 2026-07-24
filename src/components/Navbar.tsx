@@ -5,7 +5,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@heroui/react";
-import { Sofa, Info, LayoutDashboard, LogOut, User, PlusCircle, Menu, X, Package, Home, ChevronRight, ShoppingCart, LogIn, UserPlus } from 'lucide-react';
+import { 
+  Sofa, 
+  Info, 
+  LayoutDashboard, 
+  LogOut, 
+  User, 
+  PlusCircle, 
+  Menu, 
+  X, 
+  Package, 
+  Home, 
+  ChevronRight, 
+  ShoppingCart, 
+  LogIn, 
+  UserPlus 
+} from 'lucide-react';
 import { motion, AnimatePresence } from "framer-motion";
 import { authClient } from "@/lib/auth-client";
 import { useCart } from '@/context/CartContext';
@@ -123,27 +138,37 @@ const Navbar = () => {
                       <p className="font-bold text-gray-800 text-sm truncate">{session.user?.name}</p>
                       <p className="text-[11px] text-gray-500 truncate">{session.user?.email}</p>
                     </div>
-                    <div className="py-2">
-                      {[ 
-                        { name: "Dashboard", path: "/dashboard" },
-                        { name: "Add Item", path: "/add-product" },
-                      ].map((item) => {
-                         const isActive = pathname === item.path;
-                         return (
-                            <Link key={item.path} href={item.path} onClick={() => setIsDropdownOpen(false)} 
-                            className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all ${isActive ? "bg-orange-50 text-orange-600 font-semibold" : "text-gray-700 hover:bg-orange-50"}`}>
-                              {item.name}
-                            </Link>
-                         );
-                      })}
-                      {/* Manage Items / Cart Icon in Dropdown */}
+                    <div className="py-2 space-y-1">
+                      {/* Dashboard Link with Icon */}
+                      <Link 
+                        href="/dashboard" 
+                        onClick={() => setIsDropdownOpen(false)} 
+                        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all ${pathname === "/dashboard" ? "bg-orange-50 text-orange-600 font-semibold" : "text-gray-700 hover:bg-orange-50"}`}
+                      >
+                        <LayoutDashboard size={18} className={pathname === "/dashboard" ? "text-orange-600" : "text-gray-400"} />
+                        <span>Dashboard</span>
+                      </Link>
+
+                      {/* Add Item Link with Icon */}
+                      <Link 
+                        href="/add-product" 
+                        onClick={() => setIsDropdownOpen(false)} 
+                        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all ${pathname === "/add-product" ? "bg-orange-50 text-orange-600 font-semibold" : "text-gray-700 hover:bg-orange-50"}`}
+                      >
+                        <PlusCircle size={18} className={pathname === "/add-product" ? "text-orange-600" : "text-gray-400"} />
+                        <span>Add Item</span>
+                      </Link>
+
+                      {/* Manage Items / Cart Link */}
                       <button 
                         onClick={() => { setIsDropdownOpen(false); handleProtectedNavigation("/cart"); }}
                         className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all text-gray-700 hover:bg-orange-50 text-left"
                       >
-                        <Package size={18} className="text-gray-400" /> Manage Items
+                        <Package size={18} className="text-gray-400" />
+                        <span>Manage Items</span>
                       </button>
                     </div>
+
                     <div className="border-t border-gray-100 pt-2">
                       <button onClick={handleLogout} className="w-full flex items-center gap-3 text-red-500 hover:bg-red-50 font-bold px-4 py-2.5 rounded-xl transition-all">
                         <LogOut size={18} /> Logout
@@ -183,9 +208,14 @@ const Navbar = () => {
                   </div>
                 )}
 
+                {/* Mobile Navigation - Dashboard / Add Item সরিয়ে শুধু সাধারণ লিঙ্ক রাখা হয়েছে */}
                 <div className="flex flex-col gap-2 font-semibold">
-                  <Link href="/" className={getMobileLinkClass("/")} onClick={() => setIsSidebarOpen(false)}><Home size={20}/>Home <ChevronRight size={18} className="ml-auto"/></Link>
-                  <Link href="/productsPage" className={getMobileLinkClass("/productsPage")} onClick={() => setIsSidebarOpen(false)}><Package size={20}/>Products <ChevronRight size={18} className="ml-auto"/></Link>
+                  <Link href="/" className={getMobileLinkClass("/")} onClick={() => setIsSidebarOpen(false)}>
+                    <Home size={20}/>Home <ChevronRight size={18} className="ml-auto"/>
+                  </Link>
+                  <Link href="/productsPage" className={getMobileLinkClass("/productsPage")} onClick={() => setIsSidebarOpen(false)}>
+                    <Package size={20}/>Products <ChevronRight size={18} className="ml-auto"/>
+                  </Link>
                   
                   {/* Cart Button with Protected Navigation */}
                   <button 
@@ -195,15 +225,9 @@ const Navbar = () => {
                     <ShoppingCart size={20}/>Cart <ChevronRight size={18} className="ml-auto"/>
                   </button>
 
-                  <Link href="/About" className={getMobileLinkClass("/About")} onClick={() => setIsSidebarOpen(false)}><Info size={20}/>About <ChevronRight size={18} className="ml-auto"/></Link>
-                  
-                  {session && (
-                    <>
-                      <div className="my-2 border-t border-gray-100" />
-                      <Link href="/dashboard" className={getMobileLinkClass("/dashboard")} onClick={() => setIsSidebarOpen(false)}><LayoutDashboard size={20}/>Dashboard <ChevronRight size={18} className="ml-auto"/></Link>
-                      <Link href="/add-product" className={getMobileLinkClass("/add-product")} onClick={() => setIsSidebarOpen(false)}><PlusCircle size={20}/>Add Item <ChevronRight size={18} className="ml-auto"/></Link>
-                    </>
-                  )}
+                  <Link href="/About" className={getMobileLinkClass("/About")} onClick={() => setIsSidebarOpen(false)}>
+                    <Info size={20}/>About <ChevronRight size={18} className="ml-auto"/>
+                  </Link>
                 </div>
               </div>
 
