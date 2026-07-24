@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import { FcGoogle } from "react-icons/fc";
 
 import {
@@ -20,11 +20,18 @@ const LogInPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
+  // Inline Message States
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (loading) return;
     
     setLoading(true);
+    setSuccessMessage("");
+    setErrorMessage("");
+
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
@@ -34,23 +41,34 @@ const LogInPage: React.FC = () => {
       password,
       fetchOptions: {
         onSuccess: () => {
-          // কোনো Toast ছাড়াই সাথে সাথে রিডাইরেক্ট হয়ে যাবে
-          router.push('/');
-          router.refresh();
-        },
-        onError: () => {
           setLoading(false);
-          // কোনো Toast মেসেজ দেখাবে না
+          // ইনলাইন সাকসেস মেসেজ দেখাবে
+          setSuccessMessage("Logged in successfully! Redirecting...");
+          
+          setTimeout(() => {
+            router.push('/');
+            router.refresh();
+          }, 1500);
+        },
+        onError: (ctx) => {
+          setLoading(false);
+          // ইনলাইন এরর মেসেজ দেখাবে
+          setErrorMessage(ctx.error.message || "Invalid email or password.");
         }
       }
     });
   };
 
   const handleGoogleLogin = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/",
-    });
+    setErrorMessage("");
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+    } catch (err) {
+      setErrorMessage("Google authentication failed. Please try again.");
+    }
   };
 
   return (
@@ -60,6 +78,22 @@ const LogInPage: React.FC = () => {
           <h1 className="text-3xl font-bold text-gray-900">Log In</h1>
           <p className="text-sm text-gray-500">Welcome back to your home for fine furniture.</p>
         </div>
+
+        {/* Website Inline Success Message Box */}
+        {successMessage && (
+          <div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 rounded-xl text-sm font-medium animate-in fade-in duration-300">
+            <FaCheckCircle className="text-emerald-500 text-lg flex-shrink-0" />
+            <span>{successMessage}</span>
+          </div>
+        )}
+
+        {/* Website Inline Error Message Box */}
+        {errorMessage && (
+          <div className="flex items-center gap-3 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm font-medium animate-in fade-in duration-300">
+            <FaExclamationCircle className="text-red-500 text-lg flex-shrink-0" />
+            <span>{errorMessage}</span>
+          </div>
+        )}
 
         <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
           <TextField isRequired name="email" type="email" className="w-full">
