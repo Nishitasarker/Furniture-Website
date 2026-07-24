@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { FcGoogle } from "react-icons/fc";
 
@@ -36,22 +34,13 @@ const LogInPage: React.FC = () => {
       password,
       fetchOptions: {
         onSuccess: () => {
-          // ১ সেকেন্ড পরেই autoClose করার অপশন যোগ করা হয়েছে
-          toast.success("Logged in successfully!", {
-            autoClose: 1000,
-          });
-
-          // টোস্ট শেষ হওয়ার সাথে সাথে ১ সেকেন্ড পর নেভিগেট হবে
-          setTimeout(() => {
-            router.push('/');
-            router.refresh();
-          }, 1000);
+          // কোনো Toast ছাড়াই সাথে সাথে রিডাইরেক্ট হয়ে যাবে
+          router.push('/');
+          router.refresh();
         },
-        onError: (ctx) => {
+        onError: () => {
           setLoading(false);
-          toast.error(ctx.error.message || "Invalid credentials.", {
-            autoClose: 2000,
-          });
+          // কোনো Toast মেসেজ দেখাবে না
         }
       }
     });
@@ -66,9 +55,6 @@ const LogInPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
-      {/* অটো ক্লোজ গ্লোবালি ১ সেকেন্ড ফিক্স করে দেওয়া হলো */}
-      <ToastContainer position="top-right" autoClose={1000} hideProgressBar={false} />
-      
       <Card className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-gray-100 space-y-6">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-900">Log In</h1>
